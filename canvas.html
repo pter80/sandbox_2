@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Titre de la page</title>
+  
+</head>
+<body>
+  <h1>Test d'animation de CANVAS</h1>
+  <canvas id="canvas" width="400"></canvas>
+  <button onclick ="clearInterval(stop);" >Mettre fin à l'animation</button>
+
+  <script>
+  /* global Image */
+      
+      let derX=0;
+      let derY=0;
+      let flagInv=false;
+      
+      function draw() {
+        let img = new Image();
+        let ctx = document.getElementById("canvas").getContext("2d");
+        img.onload = function () {
+            ctx.drawImage(img, derX, derY);
+            if (flagInv) derX-=10; else derX+=10;
+            if (derX>200 && !flagInv) flagInv=true;
+            if (derX<0 && flagInv) flagInv=false;
+           
+        };
+        img.src = "canvas_sun.png";
+        console.log("Animation",derX,derY);
+      }
+      var stop = setInterval(draw,100); 
+  </script>
+  ...
+</body>
+</html>
